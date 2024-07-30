@@ -15,8 +15,17 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
+@font-face {
+  font-family: 'HUN DIN 1451';
+  src: url('/fonts/hun-din-1451/HunDIN1451.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Other global styles */
 
 body {
+  font-family: 'HUN DIN 1451', sans-serif;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -30,4 +39,20 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.canvas-container {
+  position: relative;
+  width: 100%;
+  height: 40vh; /* Make the container take full viewport height */
+  background-color: #1C263E; /* Set a background color if needed */
+}
+
+.controls {
+  position: absolute;
+  bottom: 20px; /* Adjust as needed */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
 }
