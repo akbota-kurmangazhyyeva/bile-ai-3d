@@ -1,22 +1,23 @@
 'use client'
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'
+import axios from 'axios';
+import { useTimer } from '../context/TimerContext';
 
 const SongInput = () => {
   const [inputValue, setInputValue] = useState('');
   const [placeholder, setPlaceholder] = useState('THE WEEKND STARBOY');
   const [taskId, setTaskId] = useState('');
-  const [timer, setTimer] = useState(0);
+  const { timer, setTimer } = useTimer();
 
   const handleChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setInputValue(event.target.value);
   };
   
-  const handleFocus: React.FocusEventHandler<HTMLInputElement> | undefined = () => {
+  const handleFocus: React.FocusEventHandler<HTMLInputElement> = () => {
     setPlaceholder('');
   };
 
-  const handleBlur: React.FocusEventHandler<HTMLInputElement> | undefined = (event) => {
+  const handleBlur: React.FocusEventHandler<HTMLInputElement> = () => {
     if (inputValue === '') {
       setPlaceholder('THE WEEKND STARBOY');
     }
@@ -40,15 +41,21 @@ const SongInput = () => {
   }, [timer]);
 
   const fetchTaskCount = async () => {
-    const response = await axios.get('https://0796-104-63-22-122.ngrok-free.app/queue-status');
-    console.log(response.data.queue.length)
-    const data = await response.data;
-    const taskCount = data.length;
-    setTimer(response.data.queue.length * 3*60 - 180); // Start the timer based on the task count
+    try {
+      const response = await axios.get('https://bile.ngrok.app/queue-status');
+      let taskCount = 0;
+      if(response.data.queue.length){
+        taskCount = response.data.queue.length;
+      }
+      console.log(taskCount); // Log the task count
+      startTimer(taskCount * 3); // Start the timer based on the task count
+    } catch (error) {
+      console.error('Error fetching queue status:', error);
+    }
   };
 
   const handleSubmit = async () => {
-    const response = await fetch('https://0796-104-63-22-122.ngrok-free.app/search-song', {
+    const response = await fetch('https://bile.ngrok.app/search-song', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -57,7 +64,8 @@ const SongInput = () => {
     });
     const data = await response.json();
     setTaskId(data.task_id);
-    fetchTaskCount(); // Fetch task count and start the timer
+    localStorage.setItem('request_number',data.task_id)
+    fetchTaskCount(); 
   };
 
   return (
@@ -80,19 +88,8 @@ const SongInput = () => {
       >
         GENERATE
       </button>
-      {taskId && (
-        <div className='mt-4'>
-          <p className='text-white'>Task ID: {taskId}</p>
-          <button onClick={handleCopy} className='bg-gray-200 text-black p-2 mt-2'>Copy Task ID</button>
-        </div>
-      )}
-      {timer > 0 && (
-        <div className='mt-4'>
-          <p className='text-white'>Estimated Time Remaining: {Math.floor(timer / 60)}:{('0' + (timer % 60)).slice(-2)} minutes</p>
-        </div>
-      )}
     </div>
   );
-}
+};
 
 export default SongInput;

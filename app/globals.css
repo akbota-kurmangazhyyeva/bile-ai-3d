@@ -56,3 +56,16 @@ body {
   display: flex;
   gap: 10px;
 }
+
+.fbx-container {
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+}
+
+.fbx-container.visible {
+  width: 50vh;
+  max-height: 100vh; /* Adjust this to fit your content */
+  opacity: 1;
+}

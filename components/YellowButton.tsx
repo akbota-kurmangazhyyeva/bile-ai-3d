@@ -1,9 +1,20 @@
-import React from 'react'
+'use client'
+import React from 'react';
 
-const YellowButton = ({text}: {text: string}) => {
-  return (
-    <div className='bg-custom-yellow flex lg:text-4xl md:text-2xl sm:text-lg text-md md:p-2 p-1 items-center justify-center text-black'>{text}</div>
-  )
+interface YellowButtonProps {
+  text: string;
+  onClick?: () => void; // Optional onClick prop for handling click events
 }
 
-export default YellowButton
+const YellowButton: React.FC<YellowButtonProps> = ({ text, onClick }) => {
+  return (
+    <div
+      className='bg-custom-yellow flex lg:text-4xl md:text-2xl sm:text-lg text-md md:p-2 p-1 items-center justify-center text-black cursor-pointer' 
+      onClick={onClick} // Handle the click event
+    >
+      {text}
+    </div>
+  );
+};
+
+export default YellowButton;

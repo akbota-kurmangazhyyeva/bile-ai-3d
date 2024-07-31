@@ -6,7 +6,7 @@ const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const cards = [
-    { song_name: 'Starboy', mp3_url: 'https://nf-upload.s3.eu-north-1.amazonaws.com/renders/413ffd0a-d407-4008-8b22-a2fe232ec1f5.mp3', fbx_url: 'https://nf-upload.s3.eu-north-1.amazonaws.com/fbx/64692bf7-1884-4f6e-b135-0f6c932258de.fbx' },
+    { song_name: 'Blinding lights', mp3_url: 'https://nf-upload.s3.eu-north-1.amazonaws.com/renders/3bb4afc7-0720-4c85-8a1e-e859fc77b1e0.mp3', fbx_url: 'https://nf-upload.s3.eu-north-1.amazonaws.com/fbx/fe8de16b-5fbb-4eaf-a49c-0a33cdddc33b.fbx' },
     { song_name: 'Blinding Lights', mp3_url: 'https://nf-upload.s3.eu-north-1.amazonaws.com/renders/413ffd0a-d407-4008-8b22-a2fe232ec1f5.mp3', fbx_url: 'https://nf-upload.s3.eu-north-1.amazonaws.com/fbx/70b3bf12-d234-4f0c-8ef5-502d30502f16.fbx' },
     { song_name: 'Save Your Tears', mp3_url: 'https://nf-upload.s3.eu-north-1.amazonaws.com/renders/413ffd0a-d407-4008-8b22-a2fe232ec1f5.mp3', fbx_url: 'https://nf-upload.s3.eu-north-1.amazonaws.com/fbx/64692bf7-1884-4f6e-b135-0f6c932258de.fbx'},
     { song_name: 'In Your Eyes', mp3_url: 'https://nf-upload.s3.eu-north-1.amazonaws.com/renders/413ffd0a-d407-4008-8b22-a2fe232ec1f5.mp3', fbx_url: 'https://nf-upload.s3.eu-north-1.amazonaws.com/fbx/64692bf7-1884-4f6e-b135-0f6c932258de.fbx' },

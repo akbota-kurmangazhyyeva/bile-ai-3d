@@ -13,7 +13,7 @@ const config: Config = {
         "custom-pink": "#F1BCDB",
         "custom-bg": "#00070A",
         "custom-yellow": "#FFAA00",
-        "custom-blue": "#4B6294",
+        "custom-blue": "#1C263E",
         "custom-green": "#88FF99",
         "custom-light-blue": "#88AFFF",
         "custom-dark-green": "#439D54"

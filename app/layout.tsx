@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { TimerProvider } from '../context/TimerContext';
+import { TextProvider } from '../context/TextContext';
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -12,8 +14,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    <TimerProvider>
+    <TextProvider>
     <html lang="en">
       <body className="min-h-screen">{children}</body>
     </html>
+    </TextProvider>
+    </TimerProvider>
   );
 }
