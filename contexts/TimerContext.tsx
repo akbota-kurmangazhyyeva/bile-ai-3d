@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { createContext, useState, useContext, useEffect } from 'react';
 
 interface TimerContextProps {
@@ -12,10 +12,8 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   const [timer, setTimer] = useState<number>(0);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const savedTimer = localStorage.getItem('timer');
-      setTimer(savedTimer ? parseInt(savedTimer, 10) : 0);
-    }
+    // Initialize the timer to zero at the start
+    setTimer(0);
   }, []);
 
   useEffect(() => {
@@ -23,12 +21,7 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       const interval = setInterval(() => {
         setTimer((prevTimer) => {
           const newTimer = prevTimer - 1;
-          if (newTimer > 0) {
-            localStorage.setItem('timer', newTimer.toString());
-          } else {
-            localStorage.removeItem('timer');
-          }
-          return newTimer;
+          return newTimer >= 0 ? newTimer : 0; // Prevent going below zero
         });
       }, 1000);
       return () => clearInterval(interval);

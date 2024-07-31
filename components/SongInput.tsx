@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useTimer } from '@/contexts/TimerContext';
@@ -23,28 +23,15 @@ const SongInput = () => {
     }
   };
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(taskId);
-  };
-
   const startTimer = (minutes: number) => {
     setTimer(minutes * 60);
   };
-
-  useEffect(() => {
-    if (timer > 0) {
-      const interval = setInterval(() => {
-        setTimer((prevTimer: number) => prevTimer - 1);
-      }, 1000);
-      return () => clearInterval(interval);
-    }
-  }, [timer]);
 
   const fetchTaskCount = async () => {
     try {
       const response = await axios.get('https://bile.ngrok.app/queue-status');
       let taskCount = 0;
-      if(response.data.queue.length){
+      if (response.data.queue.length) {
         taskCount = response.data.queue.length;
       }
       console.log(taskCount); // Log the task count
@@ -64,7 +51,6 @@ const SongInput = () => {
     });
     const data = await response.json();
     setTaskId(data.task_id);
-    localStorage.setItem('request_number',data.task_id)
     fetchTaskCount(); 
   };
 
