@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ExampleCard from './ExampleCard';
+import { useRouter } from 'next/navigation';
 
 // Define the type for your dance objects
 interface Dance {
@@ -22,6 +23,7 @@ const AllDances: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 10;
+  const router = useRouter();
 
   useEffect(() => {
     (async () => {
@@ -67,14 +69,28 @@ const AllDances: React.FC = () => {
 
   return (
     <div className='bg-custom-bg min-h-screen'>
-      <input
-        type="text"
-        placeholder="Search by Task ID or Song Name"
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="mb-4 p-2 border border-gray-300"
-      />
-      <div className="flex justify-center gap-2 mt-4 text-custom-pink">
+      <button 
+        className='text-custom-pink bg-custom-red flex item-center justify-center text-2xl pl-8 pr-8 pb-4 pt-4'
+        onClick={() => router.push('/')}
+      >
+        Back
+      </button>
+      <div className="flex justify-center items-center">
+        <div className="flex flex-row gap-2 bg-custom-dark-green text-xl p-4 ml-24 mr-24 mt-8 w-full">
+          <img src="/icons/search-icon.png" className='w-[25px] h-[25px]'/>
+          <input
+            type="text"
+            placeholder="Search by id or name"
+            value={searchTerm}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setCurrentPage(1); 
+            }}
+            className="text-custom-green bg-custom-dark-green placeholder:text-custom-green"
+          />
+        </div>
+      </div>
+      <div className="flex justify-between  gap-2 ml-24 mr-24 text-custom-pink pt-8">
         <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
           Previous
         </button>
@@ -85,24 +101,24 @@ const AllDances: React.FC = () => {
           Next
         </button>
       </div>
-      <div className="flex flex-col gap-4 m-24">
+      <div className="flex flex-col gap-4 pl-24 pr-24 pb-24 pt-8">
         {currentItems.length > 0 ? (
           currentItems.map((dance) => (
             <div key={dance._id} className="bg-custom-blue text-custom-light-blue flex flex-col p-4">
-             <div className="flex flex-row justify-between">
-                <div className="flex flex-col"> 
-                <h3>{dance.song_name}</h3>
-                <p>Task ID: {dance.task_id}</p>
+              <div className="flex flex-row justify-between">
+                <div className="flex flex-col">
+                  <h3>{dance.song_name}</h3>
+                  <p>{dance.task_id}</p>
                 </div>
                 <button onClick={() => toggleFbxVisibility(dance._id)}>
-                    {visibleFbx[dance._id] ? 'Hide dance' : 'Show dance'}
+                  {visibleFbx[dance._id] ? 'Hide dance' : 'Show dance'}
                 </button>
-             </div>
-            <div className="flex items-center justify-center">
-            <div className={`fbx-container ${visibleFbx[dance._id] ? 'visible' : 'hidden'}`}>
-                <ExampleCard fbx_url={dance.fbx_url} mp3_url={dance.mp3_url} />
               </div>
-            </div>
+              <div className="flex items-center justify-center">
+                <div className={`fbx-container ${visibleFbx[dance._id] ? 'visible' : 'hidden'}`}>
+                  <ExampleCard fbx_url={dance.fbx_url} mp3_url={dance.mp3_url} />
+                </div>
+              </div>
             </div>
           ))
         ) : (
