@@ -12,6 +12,7 @@ type FBXModelProps = {
 
 const FBXModel = forwardRef<THREE.Group, FBXModelProps>(({ url, play, onModelLoaded }, ref) => {
   const fbx = useFBX(encodeURI(url));
+  console.log(fbx, url);
   const mixer = useRef<THREE.AnimationMixer | null>(null);
 
   useImperativeHandle(ref, () => fbx, [fbx]);
@@ -22,7 +23,7 @@ const FBXModel = forwardRef<THREE.Group, FBXModelProps>(({ url, play, onModelLoa
       const action = mixer.current.clipAction(fbx.animations[0]);
       
       onModelLoaded(); // Notify that the model is loaded
-
+      console.log('loadedddd')
       return () => {
         if (mixer.current) {
           mixer.current.stopAllAction();

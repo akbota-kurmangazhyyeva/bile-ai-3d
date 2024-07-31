@@ -64,7 +64,7 @@ const Queue: React.FC = () => {
         Back
       </button>
       <div className="flex justify-center items-center">
-        <div className="flex flex-row gap-2 bg-custom-dark-green text-xl p-4 ml-24 mr-24 mt-8 w-full">
+        <div className="flex flex-row gap-2 bg-custom-dark-green text-xl p-4  ml-4 mr-4 mb-4 sm:ml-6 sm:mr-6 sm:mb-6 md:ml-12 md:mr-12 md:mb-12 lg:ml-24 lg:mr-24 lg:mb-4 mt-8 w-full">
           <img src="/icons/search-icon.png" className='w-[25px] h-[25px]'/>
           <input
             type="text"
@@ -78,7 +78,7 @@ const Queue: React.FC = () => {
           />
         </div>
       </div>
-      <div className="flex justify-between  gap-2 ml-24 mr-24 text-custom-pink pt-8">
+      <div className="flex justify-between  gap-2 pl-4 pr-4 sm:pl-6 sm:pr-6 md:pl-12 md:pr-12 lg:pl-24 lg:pr-24 text-custom-pink pt-8">
         <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
           Previous
         </button>
@@ -89,7 +89,7 @@ const Queue: React.FC = () => {
           Next
         </button>
       </div>
-      <div className="flex flex-col gap-4 pl-24 pr-24 pb-24 pt-8">
+      <div className="flex flex-col gap-4 pl-4 pr-4 pb-4 sm:pl-6 sm:pr-6 sm:pb-6 md:pl-12 md:pr-12 md:pb-12 lg:pl-24 lg:pr-24 lg:pb-24 pt-8">
         {currentItems.length > 0 ? (
           currentItems.map((dance) => (
             <div key={dance.unique_id} className="bg-custom-blue text-custom-light-blue flex flex-col p-4">
@@ -103,7 +103,7 @@ const Queue: React.FC = () => {
             </div>
           ))
         ) : (
-          <p>No dances available.</p>
+          <p className='text-white'>No dances available.</p>
         )}
       </div>
     </div>

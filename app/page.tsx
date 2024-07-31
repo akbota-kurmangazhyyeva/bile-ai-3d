@@ -5,7 +5,7 @@ import MainHeader from '@/components/MainHeader'
 import SongInput from '@/components/SongInput'
 import MainYellowButtons from '@/components/MainYellowButtons'
 import SubHeader from '@/components/SubHeader'
-import Carousel from '@/components/Carousel'
+// import Carousel from '@/components/Carousel'
 import { useTimer } from '../contexts/TimerContext';
 
 const Page = () => {
@@ -27,8 +27,8 @@ const Page = () => {
       <div className='flex items-center justify-center mb-24'>
         <SongInput/>
       </div>
-      <SubHeader/>
-      <Carousel/>
+      {/* <SubHeader/> */}
+      {/* <Carousel/> */}
     </div>
   )
 }

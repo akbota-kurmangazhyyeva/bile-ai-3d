@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ExampleCard from './ExampleCard';
 import { useRouter } from 'next/navigation';
-
+import { useModelLoaded } from '@/contexts/ModelLoadedContext';
 // Define the type for your dance objects
 interface Dance {
   _id: string;
@@ -24,6 +24,8 @@ const AllDances: React.FC = () => {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 10;
   const router = useRouter();
+  const { modelLoaded } = useModelLoaded(); // Access loading state from context
+  console.log("model",modelLoaded)
 
   useEffect(() => {
     (async () => {
@@ -76,7 +78,7 @@ const AllDances: React.FC = () => {
         Back
       </button>
       <div className="flex justify-center items-center">
-        <div className="flex flex-row gap-2 bg-custom-dark-green text-xl p-4 ml-24 mr-24 mt-8 w-full">
+        <div className="flex flex-row gap-2 bg-custom-dark-green text-xl p-4 ml-4 mr-4 mb-4 sm:ml-6 sm:mr-6 sm:mb-6 md:ml-12 md:mr-12 md:mb-12 lg:ml-24 lg:mr-24 lg:mb-4 mt-8 w-full">
           <img src="/icons/search-icon.png" className='w-[25px] h-[25px]'/>
           <input
             type="text"
@@ -90,7 +92,7 @@ const AllDances: React.FC = () => {
           />
         </div>
       </div>
-      <div className="flex justify-between  gap-2 ml-24 mr-24 text-custom-pink pt-8">
+      <div className="flex justify-between  gap-2 pl-4 pr-4 sm:pl-6 sm:pr-6  md:pl-12 md:pr-12 lg:pl-24 lg:pr-24 text-custom-pink pt-4">
         <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
           Previous
         </button>
@@ -101,7 +103,7 @@ const AllDances: React.FC = () => {
           Next
         </button>
       </div>
-      <div className="flex flex-col gap-4 pl-24 pr-24 pb-24 pt-8">
+      <div className="flex flex-col gap-4 pl-4 pr-4 pb-4 sm:pl-6 sm:pr-6 sm:pb-6 md:pl-12 md:pr-12 md:pb-12 lg:pl-24 lg:pr-24 lg:pb-24 pt-4">
         {currentItems.length > 0 ? (
           currentItems.map((dance) => (
             <div key={dance._id} className="bg-custom-blue text-custom-light-blue flex flex-col p-4">
@@ -115,14 +117,15 @@ const AllDances: React.FC = () => {
                 </button>
               </div>
               <div className="flex items-center justify-center">
-                <div className={`fbx-container ${visibleFbx[dance._id] ? 'visible' : 'hidden'}`}>
-                  <ExampleCard fbx_url={dance.fbx_url} mp3_url={dance.mp3_url} />
+                <div className={`lg:fbx-container sm:fbx-container-md ${visibleFbx[dance._id] ? 'visible' : 'hidden'}`}>
+                <ExampleCard fbx_url={dance.fbx_url} mp3_url={dance.mp3_url} />
+                    <p className="text-white lg:text-xl md:text-lg text-md mt-4">Loading 3D may take some time,and as song as you see the 3d model tap to <span className='text-custom-yellow'>play</span></p> 
                 </div>
               </div>
             </div>
           ))
         ) : (
-          <p>No dances available.</p>
+          <p className='text-white'>No dances available.</p>
         )}
       </div>
     </div>

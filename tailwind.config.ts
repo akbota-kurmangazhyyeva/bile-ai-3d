@@ -15,6 +15,7 @@ const config: Config = {
         "custom-yellow": "#FFAA00",
         "custom-blue": "#1C263E",
         "custom-green": "#88FF99",
+        "custom-blue-button": "#4B6294",
         "custom-light-blue": "#88AFFF",
         "custom-dark-green": "#1C3E2A"
       },

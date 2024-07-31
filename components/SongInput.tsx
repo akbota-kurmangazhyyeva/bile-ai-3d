@@ -69,7 +69,7 @@ const SongInput = () => {
         />
       </div>
       <button
-        className='bg-custom-blue text-black lg:text-5xl md:text-3xl sm:text-xl text-lg p-4'
+        className='bg-custom-blue-button text-black lg:text-5xl md:text-3xl sm:text-xl text-lg p-4'
         onClick={handleSubmit}
       >
         GENERATE

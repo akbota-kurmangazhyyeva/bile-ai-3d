@@ -1,31 +1,52 @@
-import React from 'react';
-import Carousel from '../../components/Carousel';
+'use client'
+import React, { useState } from 'react';
 
-const App: React.FC = () => {
-  const items = [
-    {
-      song_name: 'Starboy',
-      mp3_url: 'https://nf-upload.s3.eu-north-1.amazonaws.com/renders/413ffd0a-d407-4008-8b22-a2fe232ec1f5.mp3',
-      fbx_url: 'https://nf-upload.s3.eu-north-1.amazonaws.com/fbx/64692bf7-1884-4f6e-b135-0f6c932258de.fbx',
-    },
-    {
-      song_name: 'Blinding Lights',
-      mp3_url: 'https://nf-upload.s3.eu-north-1.amazonaws.com/renders/413ffd0a-d407-4008-8b22-a2fe232ec1f5.mp3',
-      fbx_url: 'https://nf-upload.s3.eu-north-1.amazonaws.com/fbx/64692bf7-1884-4f6e-b135-0f6c932258de.fbx',
-    },
-    {
-        song_name: 'Blinding Lights',
-        mp3_url: 'https://nf-upload.s3.eu-north-1.amazonaws.com/renders/413ffd0a-d407-4008-8b22-a2fe232ec1f5.mp3',
-        fbx_url: 'https://nf-upload.s3.eu-north-1.amazonaws.com/fbx/64692bf7-1884-4f6e-b135-0f6c932258de.fbx',
-      },
-    // Add more items as needed
-  ];
+const Home: React.FC = () => {
+  const [time, setTime] = useState<number>(0);
+
+  const scheduleNotification = (seconds: number) => {
+    if (Notification.permission === 'granted') {
+      setTimeout(() => {
+        new Notification('Time is up!', {
+          body: 'This is your scheduled notification.',
+        });
+      }, seconds * 1000);
+    } else {
+      alert('Notifications are not enabled.');
+    }
+  };
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+    if (Notification.permission === 'default') {
+      Notification.requestPermission().then((permission) => {
+        if (permission === 'granted') {
+          scheduleNotification(time);
+        }
+      });
+    } else {
+      scheduleNotification(time);
+    }
+  };
 
   return (
-    <div className="w-full h-screen flex items-center justify-center">
-      <Carousel />
+    <div>
+      <h1>Schedule a Notification</h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="time">Time (seconds):</label>
+          <input
+            type="number"
+            id="time"
+            value={time}
+            onChange={(e) => setTime(Number(e.target.value))}
+            required
+          />
+        </div>
+        <button type="submit">Schedule Notification</button>
+      </form>
     </div>
   );
 };
 
-export default App;
+export default Home;

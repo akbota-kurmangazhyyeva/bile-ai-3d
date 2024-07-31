@@ -17,13 +17,7 @@ export const TextProvider: React.FC<{ children: React.ReactNode }> = ({ children
     if (timer > 0) {
       setText('YOUR REQUEST IS QUEUED');
     } else {
-      setText('YOUR ORDER IS READY');
-      const timeout = setTimeout(() => {
-        setText('Turn any music into dance'); // Reset text after 15 seconds
-      }, 15000); // 15 seconds timeout
-
-      // Cleanup function to clear the timeout if the component unmounts
-      return () => clearTimeout(timeout);
+      setText('TURN ANY MUSIC INTO DANCE');
     }
   }, [timer]);
 
