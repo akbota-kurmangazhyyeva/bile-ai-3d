@@ -1,7 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useTimer } from '../context/TimerContext';
+import { useTimer } from '@/contexts/TimerContext';
 
 const SongInput = () => {
   const [inputValue, setInputValue] = useState('');
@@ -34,7 +34,7 @@ const SongInput = () => {
   useEffect(() => {
     if (timer > 0) {
       const interval = setInterval(() => {
-        setTimer(prevTimer => prevTimer - 1);
+        setTimer((prevTimer: number) => prevTimer - 1);
       }, 1000);
       return () => clearInterval(interval);
     }

@@ -10,8 +10,7 @@ type ExampleCardProps = {
 const ExampleCard: React.FC<ExampleCardProps> = ({ fbx_url, mp3_url }) => {
   return (
     <div className="example-card">
-      <FBXViewer url={fbx_url} />
-      <AudioPlayer url={mp3_url} />
+      <FBXViewer audioUrl={mp3_url} url={fbx_url} />
     </div>
   );
 };

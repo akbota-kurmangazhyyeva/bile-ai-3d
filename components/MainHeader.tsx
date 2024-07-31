@@ -1,6 +1,6 @@
 'use client';
-import { useText } from '@/context/TextContext';
-import { useTimer } from '@/context/TimerContext'; // Import useTimer to access the timer
+import { useText } from '@/contexts/TextContext';
+import { useTimer } from '@/contexts/TimerContext';
 import React from 'react';
 import { toast, ToastContainer } from 'react-toastify'; // Import toast and ToastContainer
 import 'react-toastify/dist/ReactToastify.css'; // Import the CSS for Toastify

@@ -6,9 +6,10 @@ type ExampleCardMainProps = {
   fbx_url: string;
   mp3_url: string;
   song_name: string;
+  index:string;
 };
 
-const ExampleCardMain: React.FC<ExampleCardMainProps> = ({ fbx_url, mp3_url, song_name }) => {
+const ExampleCardMain: React.FC<ExampleCardMainProps> = ({ fbx_url, mp3_url, song_name}) => {
   return (
     <div>
       <ExampleCard fbx_url={fbx_url} mp3_url={mp3_url} />

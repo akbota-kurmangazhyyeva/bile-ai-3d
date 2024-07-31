@@ -5,9 +5,8 @@ import MainHeader from '@/components/MainHeader'
 import SongInput from '@/components/SongInput'
 import MainYellowButtons from '@/components/MainYellowButtons'
 import SubHeader from '@/components/SubHeader'
-import Footer from '@/components/Footer'
 import Carousel from '@/components/Carousel'
-import { useTimer } from '../context/TimerContext';
+import { useTimer } from '../contexts/TimerContext';
 
 const Page = () => {
   const { timer, setTimer } = useTimer();
@@ -30,11 +29,6 @@ const Page = () => {
       </div>
       <SubHeader/>
       <Carousel/>
-      {/* <div className='flex items-center justify-center mt-16'>
-        <div className=' w-1/2 '><ExampleCardMain song_name='Starboy' mp3_url='/' fbx_url='/'/></div>
-      </div> */}
-      
-        {/* <FBXViewer url="https://nf-upload.s3.eu-north-1.amazonaws.com/fbx/70b3bf12-d234-4f0c-8ef5-502d30502f16.fbx" /> */}
     </div>
   )
 }

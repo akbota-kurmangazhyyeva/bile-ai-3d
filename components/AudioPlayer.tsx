@@ -1,57 +1,41 @@
-'use client'
+'use client';
 import React, { useState, useEffect } from 'react';
 import { Howl } from 'howler';
 
 interface AudioPlayerProps {
   url: string;
+  play: boolean;
+  onPlay: () => void;
+  onStop: () => void;
 }
 
-const AudioPlayer: React.FC<AudioPlayerProps> = ({ url }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
+const AudioPlayer: React.FC<AudioPlayerProps> = ({ url, play, onPlay, onStop }) => {
   const [sound, setSound] = useState<Howl | null>(null);
 
   useEffect(() => {
     const newSound = new Howl({
       src: [url],
       loop: true,
-      onend: () => setIsPlaying(false),
+      onend: () => onStop(),
     });
     setSound(newSound);
     return () => {
       newSound.unload();
     };
-  }, [url]);
+  }, [url, onStop]);
 
-  const handlePlay = () => {
-    if (sound) {
+  useEffect(() => {
+    if (play && sound) {
       sound.play();
-      setIsPlaying(true);
-    }
-  };
-
-  const handleStop = () => {
-    if (sound) {
+      onPlay();
+    } else if (!play && sound) {
       sound.stop();
-      setIsPlaying(false);
+      sound.seek(0); // Reset to start
+      onStop();
     }
-  };
+  }, [play, sound, onPlay, onStop]);
 
-  return (
-    <div className="flex items-center space-x-4">
-      <button
-        onClick={handlePlay}
-        className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-      >
-        Play
-      </button>
-      <button
-        onClick={handleStop}
-        className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
-      >
-        Stop
-      </button>
-    </div>
-  );
+  return null; // No UI needed for the player
 };
 
 export default AudioPlayer;

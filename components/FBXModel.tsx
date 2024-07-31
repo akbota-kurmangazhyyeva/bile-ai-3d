@@ -1,36 +1,47 @@
-"use client"; // Указываем, что это клиентский компонент
-
-import React, { useRef, useEffect, useState } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { useFBX, OrbitControls } from '@react-three/drei';
+'use client';
+import React, { useRef, useEffect, forwardRef, useImperativeHandle } from 'react';
+import { useFBX } from '@react-three/drei'; // Import from drei
+import { useFrame } from '@react-three/fiber'; // Correctly import useFrame from fiber
 import * as THREE from 'three';
 
 type FBXModelProps = {
   url: string;
+  play: boolean;
+  onModelLoaded: () => void;
 };
 
-const FBXModel: React.FC<FBXModelProps> = ({ url }) => {
-  const fbxRef = useFBX(encodeURI(url));
+const FBXModel = forwardRef<THREE.Group, FBXModelProps>(({ url, play, onModelLoaded }, ref) => {
+  const fbx = useFBX(encodeURI(url));
   const mixer = useRef<THREE.AnimationMixer | null>(null);
-  const [currentAnimation, setCurrentAnimation] = useState(0);
+
+  useImperativeHandle(ref, () => fbx, [fbx]);
 
   useEffect(() => {
-    if (fbxRef.animations.length > 0) {
-      mixer.current = new THREE.AnimationMixer(fbxRef);
-      const action = mixer.current.clipAction(fbxRef.animations[0]);
-      action.play();
-
-      action.clampWhenFinished = true;
-      action.loop = THREE.LoopRepeat; // Make the animation loop indefinitely
+    if (fbx.animations.length > 0) {
+      mixer.current = new THREE.AnimationMixer(fbx);
+      const action = mixer.current.clipAction(fbx.animations[0]);
+      
+      onModelLoaded(); // Notify that the model is loaded
 
       return () => {
         if (mixer.current) {
           mixer.current.stopAllAction();
-          mixer.current.uncacheClip(fbxRef.animations[0]);
+          mixer.current.uncacheClip(fbx.animations[0]);
         }
       };
     }
-  }, [fbxRef]);
+  }, [fbx, onModelLoaded]);
+
+  useEffect(() => {
+    if (mixer.current) {
+      const action = mixer.current.clipAction(fbx.animations[0]);
+      if (play) {
+        action.reset().play();
+      } else {
+        action.stop();
+      }
+    }
+  }, [play, fbx]);
 
   useFrame((state, delta) => {
     if (mixer.current) {
@@ -38,7 +49,9 @@ const FBXModel: React.FC<FBXModelProps> = ({ url }) => {
     }
   });
 
-  return <primitive object={fbxRef} scale={[0.04, 0.04, 0.04]} position={[0, 0, 12]} />;
-};
+  return <primitive object={fbx} scale={[0.04, 0.04, 0.04]} position={[0, 0, 12]} />;
+});
+
+FBXModel.displayName = 'FBXModel';
 
 export default FBXModel;
