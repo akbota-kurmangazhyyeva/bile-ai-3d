@@ -5,11 +5,28 @@ import MainHeader from '@/components/MainHeader'
 import SongInput from '@/components/SongInput'
 import MainYellowButtons from '@/components/MainYellowButtons'
 import SubHeader from '@/components/SubHeader'
-// import Carousel from '@/components/Carousel'
 import { useTimer } from '../contexts/TimerContext';
+import Link from 'next/link'
+import { useText } from '@/contexts/TextContext'
+import { toast, ToastContainer } from 'react-toastify'; 
+import 'react-toastify/dist/ReactToastify.css'; 
 
 const Page = () => {
   const { timer, setTimer } = useTimer();
+  const { text } = useText();
+  const handleCopy = () => {
+    const request_number = localStorage.getItem('request_number')
+    if (request_number) {
+      navigator.clipboard.writeText(request_number) // Use the Clipboard API to copy the text
+        .then(() => {
+          toast.success(`Request number #${request_number} copied to clipboard!`); // Use toast to show a success message
+        })
+        .catch((err) => {
+          console.error('Failed to copy: ', err);
+          toast.error('Failed to copy request number'); // Show an error message if copying fails
+        });
+    }
+  };
   return (
     <div className='bg-custom-bg min-h-screen flex flex-col text-white'>
       <MainHeader/>
@@ -20,10 +37,10 @@ const Page = () => {
       </div>
       <div className='flex items-center justify-center'>
       {
-        timer > 0 ? <div className="mt-16">you can copy the <span className='text-custom-yellow'>ID</span> ABOVE AND <span className='text-custom-yellow'>SEARCH FOR YOUR DANCE</span>  AFTER the timer times out using this <span className='text-custom-yellow'>ID</span></div> : <></>
+        timer > 0 ? <div className="mt-8 lg:mt-16 text-xs lg:text-xl md:text-lg sm:text-sm w-3/4">you can copy: <span className='text-custom-yellow cursor-pointer' onClick={handleCopy}>{localStorage.getItem('request_number')}</span> AND <Link href="/all-dances" className='text-custom-yellow'>SEARCH FOR YOUR DANCE</Link>  AFTER the timer times out</div> : <></>
       }
       </div>
-      <div className='flex justify-center mt-24 mb-8'> <MainYellowButtons/></div>
+      <div className='flex justify-center lg:mt-24 mt-8 mb-8'> <MainYellowButtons/></div>
       <div className='flex items-center justify-center mb-24'>
         <SongInput/>
       </div>
