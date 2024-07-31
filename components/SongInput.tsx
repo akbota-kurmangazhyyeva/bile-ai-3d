@@ -51,6 +51,8 @@ const SongInput = () => {
     });
     const data = await response.json();
     setTaskId(data.task_id);
+    localStorage.setItem('request_number', data.task_id )
+    console.log(data.task_id)
     fetchTaskCount(); 
   };
 

@@ -22,7 +22,7 @@ const FBXModel = forwardRef<THREE.Group, FBXModelProps>(({ url, play, onModelLoa
       mixer.current = new THREE.AnimationMixer(fbx);
       const action = mixer.current.clipAction(fbx.animations[0]);
       
-      onModelLoaded(); // Notify that the model is loaded
+      onModelLoaded(); 
       console.log('loadedddd')
       return () => {
         if (mixer.current) {
