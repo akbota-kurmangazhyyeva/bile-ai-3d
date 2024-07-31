@@ -24,6 +24,7 @@ export default function RootLayout({
     <TextProvider>
     <html lang="en">
       <body className="min-h-screen">
+      <Analytics/>
         {children}
         <Footer/>
         </body>
