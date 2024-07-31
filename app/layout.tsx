@@ -6,6 +6,7 @@ import { TimerProvider } from "@/contexts/TimerContext";
 import { TextProvider } from "@/contexts/TextContext";
 import Footer from "@/components/Footer";
 import { ModelLoadedProvider } from '@/contexts/ModelLoadedContext';
+import { Analytics } from "@vercel/analytics/react"
 
 export const metadata: Metadata = {
   title: "Create Next App",

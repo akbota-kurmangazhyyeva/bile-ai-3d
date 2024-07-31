@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import ExampleCard from './ExampleCard';
+import { useModelLoaded } from '../contexts/ModelLoadedContext'; // Adjust the import path as needed
 
 interface Dance {
     _id: string;
@@ -19,6 +20,8 @@ type DanceContainerProps = {
 };
 
 const DanceContainer: React.FC<DanceContainerProps> = ({ dance, toggleFbxVisibility, visibleFbx }) => {
+  const { modelLoaded } = useModelLoaded(); // Access loading state from context
+
   return (
     <div key={dance._id} className="dance-card">
       <h3>{dance.song_name}</h3>
@@ -27,7 +30,11 @@ const DanceContainer: React.FC<DanceContainerProps> = ({ dance, toggleFbxVisibil
         {visibleFbx[dance._id] ? 'Hide dance' : 'Show dance'}
       </button>
       <div className={`fbx-container ${visibleFbx[dance._id] ? 'visible' : 'hidden'}`}>
-        <ExampleCard fbx_url={dance.fbx_url} mp3_url={dance.mp3_url}/>
+        {modelLoaded ? (
+          <p className="text-white">Loading...</p> // Show loading text when model is loading
+        ) : (
+          <ExampleCard fbx_url={dance.fbx_url} mp3_url={dance.mp3_url} />
+        )}
       </div>
     </div>
   );
