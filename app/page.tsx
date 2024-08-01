@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { useText } from '@/contexts/TextContext'
 import { toast, ToastContainer } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css'; 
+import { useTranslation } from 'react-i18next';
 
 const Page = () => {
   const { timer, setTimer } = useTimer();

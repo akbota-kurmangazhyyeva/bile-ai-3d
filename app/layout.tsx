@@ -5,8 +5,10 @@ import "slick-carousel/slick/slick-theme.css";
 import { TimerProvider } from "@/contexts/TimerContext";
 import { TextProvider } from "@/contexts/TextContext";
 import Footer from "@/components/Footer";
+import { I18nextProvider } from 'react-i18next';
 import { ModelLoadedProvider } from '@/contexts/ModelLoadedContext';
 import { Analytics } from "@vercel/analytics/react"
+// import i18n from '../i18n';
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,6 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    // <I18nextProvider i18n={i18n}>
     <ModelLoadedProvider>
     <TimerProvider>
     <TextProvider>
@@ -32,5 +35,6 @@ export default function RootLayout({
     </TextProvider>
     </TimerProvider>
     </ModelLoadedProvider>
+    //  </I18nextProvider>
   );
 }

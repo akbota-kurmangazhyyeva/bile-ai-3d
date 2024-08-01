@@ -1,6 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
-import { Howl } from 'howler';
+import React, { useEffect, useRef } from 'react';
 
 interface AudioPlayerProps {
   url: string;
@@ -10,32 +9,42 @@ interface AudioPlayerProps {
 }
 
 const AudioPlayer: React.FC<AudioPlayerProps> = ({ url, play, onPlay, onStop }) => {
-  const [sound, setSound] = useState<Howl | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    const newSound = new Howl({
-      src: [url],
-      loop: true,
-      onend: () => onStop(),
-    });
-    setSound(newSound);
-    return () => {
-      newSound.unload();
+    if (!audioRef.current) {
+      return;
+    }
+
+    const handleEnded = () => {
+      onStop();
     };
-  }, [url, onStop]);
+
+    const audio = audioRef.current;
+    audio.loop = true;
+    audio.addEventListener('ended', handleEnded);
+
+    return () => {
+      audio.removeEventListener('ended', handleEnded);
+    };
+  }, [onStop]);
 
   useEffect(() => {
-    if (play && sound) {
-      sound.play();
+    if (!audioRef.current) {
+      return;
+    }
+
+    if (play) {
+      audioRef.current.play();
       onPlay();
-    } else if (!play && sound) {
-      sound.stop();
-      sound.seek(0); // Reset to start
+    } else {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0; // Reset to start
       onStop();
     }
-  }, [play, sound, onPlay, onStop]);
+  }, [play, onPlay, onStop]);
 
-  return null; // No UI needed for the player
+  return <audio ref={audioRef} src={url} style={{ display: 'none' }} />;
 };
 
 export default AudioPlayer;
