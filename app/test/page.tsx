@@ -1,4 +1,3 @@
-'use client'
 import { useState } from 'react';
 import axios from 'axios';
 
@@ -14,7 +13,7 @@ const Home = () => {
       const response = await axios.post('/api/vote', { uniqueId, voteOption });
       setMessage(response.data.message);
     } catch (error) {
-      setMessage((error as any).response.data.error);
+      setMessage((error as any).response?.data?.error || 'An error occurred');
     }
   };
 
