@@ -9,8 +9,8 @@ interface YellowButtonProps {
 const YellowButton: React.FC<YellowButtonProps> = ({ text, onClick }) => {
   return (
     <div
-      className='bg-custom-yellow flex lg:text-4xl md:text-2xl sm:text-lg text-xs md:p-2 p-1 items-center justify-center text-black cursor-pointer' 
-      onClick={onClick} // Handle the click event
+      className='bg-custom-yellow flex lg:text-[1.25rem] md:text-[1.0rem] sm:text-[0.75rem] text-[0.5rem] md:p-2 p-1 items-center justify-center text-black cursor-pointer' 
+      onClick={onClick} 
     >
       {text}
     </div>

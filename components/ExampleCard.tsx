@@ -1,6 +1,6 @@
 import React from 'react';
 import FBXViewer from './FBXViewer';
-import AudioPlayer from './AudioPlayer';
+
 
 type ExampleCardProps = {
   fbx_url: string;

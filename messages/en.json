@@ -1,0 +1,30 @@
+{
+    "HomePage": {
+      "queue": "queue",
+      "dance": "SEARCH / GET DANCE",
+      "input": "ENTER THE SONG NAME",
+      "generate": "GENERATE",
+      "placeholder" : "The weeknd startboy",
+      "header2":"YOUR REQUEST IS QUEUED",
+      "header3": "TURN ANY MUSIC INTO DANCE",
+      "copy": "you can copy:",
+      "and": "and",
+      "search-text": "SEARCH FOR YOUR DANCE",
+      "timer": "AFTER the timer times out",
+      "loading": "loading"
+    },
+    "AllDances":{
+        "SearchBar": "Search by id or name",
+        "previous": "previous",
+        "next": "next",
+        "of": "of",
+        "page": "page",
+        "back": "back",
+        "showDance": "show dance",
+        "hideDance": "hide dance",
+        "noDance": "List is currently empty",
+        "warning": "Loading 3D may take some time,and as song as you see the 3d model tap to",
+        "play": "play",
+        "stop" : "stop"
+    }
+  }

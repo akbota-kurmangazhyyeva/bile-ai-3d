@@ -4,7 +4,9 @@ import axios from 'axios';
 import ExampleCard from './ExampleCard';
 import { useRouter } from 'next/navigation';
 import { useModelLoaded } from '@/contexts/ModelLoadedContext';
-// Define the type for your dance objects
+import {useTranslations} from 'next-intl';
+import {usePathname} from 'next/navigation'
+
 interface Dance {
   _id: string;
   song_name: string;
@@ -23,7 +25,9 @@ const AllDances: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
   const itemsPerPage = 10;
+  const pathname = usePathname()
   const router = useRouter();
+  const t = useTranslations('AllDances');
   const { modelLoaded } = useModelLoaded(); // Access loading state from context
   console.log("model",modelLoaded)
 
@@ -34,13 +38,13 @@ const AllDances: React.FC = () => {
         console.log(response.data);
         if (response.data && response.data.dances) {
           setDances(response.data.dances);
-          setError(null); // Reset error if the request is successful
+          setError(null); 
         } else {
-          setDances([]); // Set to an empty array if response structure is not as expected
+          setDances([]); 
         }
       } catch (error) {
         console.error('Error fetching the dances:', error);
-        setDances([]); // Set to an empty array in case of an error
+        setDances([]); 
         setError('Failed to fetch dances. Please try again later.');
       }
     })();
@@ -68,21 +72,26 @@ const AllDances: React.FC = () => {
       setCurrentPage(newPage);
     }
   };
+  const handleClick = () =>{
+    console.log(pathname)
+    const newPathArray = pathname.split('/')[0];
+    router.push(`/${newPathArray}`)
+  }
 
   return (
     <div className='bg-custom-bg min-h-screen'>
       <button 
         className='text-custom-pink bg-custom-red flex item-center justify-center text-2xl pl-8 pr-8 pb-4 pt-4'
-        onClick={() => router.push('/')}
+        onClick={handleClick}
       >
-        Back
+       {t('back')}
       </button>
       <div className="flex justify-center items-center">
         <div className="flex flex-row gap-2 bg-custom-dark-green text-xl p-4 ml-8 mr-8 mb-4 sm:ml-6 sm:mr-6 sm:mb-6 md:ml-12 md:mr-12 md:mb-12 lg:ml-24 lg:mr-24 lg:mb-4 mt-8 w-full">
           <img src="/icons/search-icon.png" className='w-[25px] h-[25px]'/>
           <input
             type="text"
-            placeholder="Search by id or name"
+            placeholder={`${t('SearchBar')}`}
             value={searchTerm}
             onChange={(e) => {
               setSearchTerm(e.target.value);
@@ -94,13 +103,13 @@ const AllDances: React.FC = () => {
       </div>
       <div className="flex justify-between  gap-2 pl-8 pr-8 sm:pl-6 sm:pr-6  md:pl-12 md:pr-12 lg:pl-24 lg:pr-24 text-custom-pink pt-4">
         <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
-          Previous
+        {t('previous')}
         </button>
         <span>
-          Page {currentPage} of {totalPages}
+        {t('page')} {currentPage} {t('of')} {totalPages}
         </span>
         <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
-          Next
+        {t('next')}
         </button>
       </div>
       <div className="flex flex-col gap-4 pl-8 pr-8 pb-8 sm:pl-6 sm:pr-6 sm:pb-6 md:pl-12 md:pr-12 md:pb-12 lg:pl-24 lg:pr-24 lg:pb-24 pt-4">
@@ -113,19 +122,19 @@ const AllDances: React.FC = () => {
                   <p>{dance.task_id}</p>
                 </div>
                 <button onClick={() => toggleFbxVisibility(dance._id)}>
-                  {visibleFbx[dance._id] ? 'Hide dance' : 'Show dance'}
+                  {visibleFbx[dance._id] ? `${t('hideDance')}` : `${t('showDance')}`}
                 </button>
               </div>
               <div className="flex items-center justify-center">
                 <div className={`lg:fbx-container sm:fbx-container-md ${visibleFbx[dance._id] ? 'visible' : 'hidden'}`}>
                 <ExampleCard fbx_url={dance.fbx_url} mp3_url={dance.mp3_url} />
-                    <p className="text-white lg:text-xl md:text-lg text-md mt-4">Loading 3D may take some time,and as song as you see the 3d model tap to <span className='text-custom-yellow'>play</span></p> 
+                    <p className="text-white lg:text-xl md:text-lg text-md mt-4">{t('warning')} <span className='text-custom-yellow'> {t('play')}</span></p> 
                 </div>
               </div>
             </div>
           ))
         ) : (
-          <p className='text-white'>No dances available.</p>
+          <p className='text-white'>{t('noDance')}</p>
         )}
       </div>
     </div>

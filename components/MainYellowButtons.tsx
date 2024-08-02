@@ -1,26 +1,28 @@
 'use client'
 import React from 'react';
 import YellowButton from './YellowButton';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
+import {useTranslations} from 'next-intl';
 
 const MainYellowButtons: React.FC = () => {
-  const router = useRouter(); // Get the router instance
-
+  const router = useRouter(); 
+  const pathname = usePathname();
+  const t = useTranslations('HomePage');
   const handleQueueNavigation = () => {
-    router.push('/queue'); // Navigate to the /queue route
+    router.push(`${pathname}/queue`); 
   };
 
   const handleDanceSearchNavigation = () => {
-    router.push('/all-dances'); // Navigate to the /all-dances route
+    router.push(`${pathname}/all-dances`); 
   };
 
   return (
     <div className='flex flex-row w-3/4 gap-4'>
       <div className="w-1/3">
-        <YellowButton text="WATCH QUEUE" onClick={handleQueueNavigation} />
+        <YellowButton text={`${t('queue')}`} onClick={handleQueueNavigation} />
       </div>
       <div className="w-2/3">
-        <YellowButton text="SEARCH FOR A DANCE" onClick={handleDanceSearchNavigation} />
+        <YellowButton text={`${t('dance')}`} onClick={handleDanceSearchNavigation} />
       </div>
     </div>
   );

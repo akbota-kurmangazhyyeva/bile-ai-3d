@@ -5,6 +5,7 @@ import { OrbitControls } from '@react-three/drei';
 import FBXModel from './FBXModel';
 import AudioPlayer from './AudioPlayer';
 import * as THREE from 'three';
+import {useTranslations} from 'next-intl';
 
 type FBXViewerProps = {
   url: string; 
@@ -15,7 +16,7 @@ const FBXViewer: React.FC<FBXViewerProps> = ({ url, audioUrl }) => {
   const [play, setPlay] = useState(false);
   const [modelLoaded, setModelLoaded] = useState(false);
   const modelRef = useRef<THREE.Group>(null);
-  console.log('url', url);
+  const t = useTranslations('AllDances');
   
   const handleModelLoaded = useCallback(() => {
     setModelLoaded(true);
@@ -62,13 +63,13 @@ const FBXViewer: React.FC<FBXViewerProps> = ({ url, audioUrl }) => {
           onClick={handlePlay}
           className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
         >
-          Play
+          {t('play')}
         </button>
         <button
           onClick={handleStop}
           className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600"
         >
-          Stop
+          {t('stop')}
         </button>
       </div>
       </div>
