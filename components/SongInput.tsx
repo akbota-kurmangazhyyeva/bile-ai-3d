@@ -34,6 +34,7 @@ const SongInput = () => {
     try {
       const response = await axios.get('https://bile.ngrok.app/queue-status');
       let taskCount = 0;
+      console.log(response.data)
       if (response.data.queue.length) {
         taskCount = response.data.queue.length;
       }
