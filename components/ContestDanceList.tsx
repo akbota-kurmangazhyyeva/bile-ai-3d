@@ -17,7 +17,7 @@ const ContestDanceList: React.FC = () => {
   useEffect(() => {
     const fetchDances = async () => {
       try {
-        const response = await axios.get('https://bile.ngrok.app/all-contest-dances');
+        const response = await axios.get('https://bile-contest-h5a6gcfre7ckedf2.eastus-01.azurewebsites.net/all-contest-dances');
         setDances(response.data.contest_dances);
       } catch (error) {
         console.error('Error fetching dances', error);
@@ -30,7 +30,7 @@ const ContestDanceList: React.FC = () => {
   const handleVote = async (uniqueId: string) => {
     try {
       const ip_address = await getUserIP(); // Implement this function to get the IP address
-      await axios.post(`https://bile.ngrok.app/contest_dance/${uniqueId}/vote`, { ip_address });
+      await axios.post(`https://bile-contest-h5a6gcfre7ckedf2.eastus-01.azurewebsites.net/contest_dance/${uniqueId}/vote`, { ip_address });
       alert('Vote added successfully!');
       // Update the state or refetch the data to reflect the vote count change
     } catch (error) {
