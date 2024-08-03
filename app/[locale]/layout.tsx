@@ -32,6 +32,7 @@ export default async function LocaleLayout({
                 {children}
               
             </body>
+            <Analytics/>
           </html>
         </TextProvider>
       </TimerProvider>
