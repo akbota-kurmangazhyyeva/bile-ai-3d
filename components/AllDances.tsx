@@ -83,7 +83,7 @@ const AllDances: React.FC = () => {
         {t('back')}
       </button>
       <div className="flex justify-center items-center">
-        <div className="flex flex-row gap-2 bg-custom-dark-green text-xl p-4 ml-8 mr-8 mb-4 sm:ml-6 sm:mr-6 sm:mb-6 md:ml-12 md:mr-12 md:mb-12 lg:ml-24 lg:mr-24 lg:mb-4 mt-8 w-full">
+        {/* <div className="flex flex-row gap-2 bg-custom-dark-green text-xl p-4 ml-8 mr-8 mb-4 sm:ml-6 sm:mr-6 sm:mb-6 md:ml-12 md:mr-12 md:mb-12 lg:ml-24 lg:mr-24 lg:mb-4 mt-8 w-full">
           <img src="/icons/search-icon.png" className='w-[25px] h-[25px]' />
           <input
             type="text"
@@ -92,7 +92,7 @@ const AllDances: React.FC = () => {
             onChange={handleSearchChange}
             className="text-custom-green bg-custom-dark-green placeholder:text-custom-green"
           />
-        </div>
+        </div> */}
       </div>
       <div className="flex justify-between gap-2 pl-8 pr-8 sm:pl-6 sm:pr-6 md:pl-12 md:pr-12 lg:pl-24 lg:pr-24 text-custom-pink pt-4">
         <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>

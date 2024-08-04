@@ -37,7 +37,7 @@ const Page = () => {
       </div>
       <div className='flex items-center justify-center'>
       {
-        timer > 0 ? <div className="mt-8 lg:mt-16 text-xs lg:text-xl md:text-lg sm:text-sm w-3/4">{t('copy')} <span className='text-custom-yellow cursor-pointer' onClick={handleCopy}>{localStorage.getItem('request_number')}</span> {t('and')} <Link href="/all-dances" className='text-custom-yellow'> {t('search-text')}</Link>  {t('timer')}</div> : <></>
+        timer > 0 ? <div className="flex items-center justify-center mt-8 lg:mt-16 text-xs lg:text-xl md:text-lg sm:text-sm w-3/4">{t('copy')} </div> : <></>
       }
       </div>
       <div className='flex justify-center lg:mt-24 mt-8 mb-8'> <MainYellowButtons/></div>
