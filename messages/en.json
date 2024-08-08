@@ -11,7 +11,9 @@
       "and": "and",
       "search-text": "SEARCH FOR YOUR DANCE",
       "timer": "AFTER the timer times out",
-      "loading": "loading"
+      "loading": "loading",
+      "upload": "Upload your full-length photo",
+      "new": "New Feature with Photos Coming Soon! Stay Tuned!"
     },
     "AllDances":{
         "SearchBar": "Search by id or name",

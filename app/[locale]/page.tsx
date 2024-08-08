@@ -9,6 +9,8 @@ import { useText } from '@/contexts/TextContext'
 import { toast, ToastContainer } from 'react-toastify'; 
 import 'react-toastify/dist/ReactToastify.css'; 
 import {useTranslations} from 'next-intl';
+import FileUpload from '@/components/FileUpload'
+import ComingSoonNotice from '@/components/ComingSoonNotice'
 
 const Page = () => {
   const { timer, setTimer } = useTimer();
@@ -29,6 +31,7 @@ const Page = () => {
   };
   return (
     <div className='bg-custom-bg min-h-screen flex flex-col text-white'>
+      <ComingSoonNotice/>
       <MainHeader/>
       <div className='flex items-center justify-center'>
       {
@@ -42,7 +45,11 @@ const Page = () => {
       </div>
       <div className='flex justify-center lg:mt-24 mt-8 mb-8'> <MainYellowButtons/></div>
       <div className='flex items-center justify-center mb-24'>
+        <div className='flex flex-col w-full items-center justify-center gap-6'>
+          <div className='lg:text-xl md:text-lg text-xs '>{t('upload')}</div>
+        {/* <FileUpload/> */}
         <SongInput/>
+        </div>
       </div>
       {/* <SubHeader/> */}
       {/* <Carousel/> */}
