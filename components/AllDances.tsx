@@ -27,7 +27,6 @@ const AllDances: React.FC = () => {
   const t = useTranslations('AllDances');
   const base_url = process.env.NEXT_PUBLIC_API_URL;
 
-  // Fetch dances without search terms from backend
   useEffect(() => {
     (async () => {
       try {
@@ -47,25 +46,23 @@ const AllDances: React.FC = () => {
     })();
   }, []);
 
-  // Filter dances based on search term
   const filteredDances = dances.filter(dance =>
     dance.song_name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Toggle FBX model visibility and load the FBX model if not already loaded
-  const toggleFbxVisibility = async (songName: string, fbxUrl: string) => {
+  const toggleFbxVisibility = async (id: string, fbxUrl: string) => {
     setVisibleFbx((prevState) => ({
       ...prevState,
-      [songName]: !prevState[songName],
+      [id]: !prevState[id],
     }));
   
-    if (!loadedFbx[songName]) {
+    if (!loadedFbx[id]) {
       try {
         const response = await fetch(fbxUrl);
         if (response.ok) {
           setLoadedFbx((prevState) => ({
             ...prevState,
-            [songName]: true,
+            [id]: true,
           }));
         }
       } catch (error) {
@@ -74,26 +71,22 @@ const AllDances: React.FC = () => {
     }
   };
 
-  // Page navigation
   const handlePageChange = (newPage: number) => {
     if (newPage > 0 && newPage <= totalPages) {
       setCurrentPage(newPage);
     }
   };
 
-  // Search input handler
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
-    setCurrentPage(1); // Reset to page 1 when search term changes
+    setCurrentPage(1);
   };
 
-  // Navigate back to home
   const handleClick = () => {
     const newPathArray = pathname.split('/')[0];
     router.push(`/${newPathArray}`);
   };
 
-  // Paginate filtered dances
   const startIndex = (currentPage - 1) * itemsPerPage;
   const currentDances = filteredDances.slice(startIndex, startIndex + itemsPerPage);
 
@@ -134,16 +127,16 @@ const AllDances: React.FC = () => {
       <div className="flex flex-col gap-4 pl-8 pr-8 pb-8 sm:pl-6 sm:pr-6 sm:pb-6 md:pl-12 md:pr-12 md:pb-12 lg:pl-24 lg:pr-24 lg:pb-24 pt-4">
         {currentDances.length > 0 ? (
           currentDances.map((dance) => (
-            <div key={dance.song_name} className="bg-custom-blue text-custom-light-blue flex flex-col p-4">
+            <div key={dance._id} className="bg-custom-blue text-custom-light-blue flex flex-col p-4">
               <div className="flex flex-row justify-between">
                 <div className="flex flex-col">
                   <h3>{dance.song_name}</h3>
                 </div>
-                <button onClick={() => toggleFbxVisibility(dance.song_name, dance.fbx_url)}>
-                  {visibleFbx[dance.song_name] ? `${t('hideDance')}` : `${t('showDance')}`}
+                <button onClick={() => toggleFbxVisibility(dance._id, dance.fbx_url)}>
+                  {visibleFbx[dance._id] ? `${t('hideDance')}` : `${t('showDance')}`}
                 </button>
               </div>
-              {visibleFbx[dance.song_name] && loadedFbx[dance.song_name] ? (
+              {visibleFbx[dance._id] && loadedFbx[dance._id] ? (
                 <div className="lg:fbx-container sm:fbx-container-md">
                   <ExampleCard fbx_url={dance.fbx_url} mp3_url={dance.mp3_url} />
                   <p className="text-white lg:text-xl md:text-lg text-md mt-4">
