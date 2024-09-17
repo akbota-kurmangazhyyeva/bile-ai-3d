@@ -27,12 +27,16 @@ const AllDances: React.FC = () => {
   const pathname = usePathname();
   const router = useRouter();
   const t = useTranslations('AllDances');
+  const base_url = process.env.NEXT_PUBLIC_API_URL;
 
   useEffect(() => {
     const fetchDances = async () => {
       try {
+        // const response = await axios.get<{ dances: Dance[]; total_pages: number }>(
+        //   `${base_url}/all-dances?page=${currentPage}&page_size=${itemsPerPage}&search=${searchTerm}`
+        // );
         const response = await axios.get<{ dances: Dance[]; total_pages: number }>(
-          `https://bile.ngrok.app/all-dances?page=${currentPage}&page_size=${itemsPerPage}&search=${searchTerm}`
+          `${base_url}/dances`
         );
         if (response.data) {
           setDances(response.data.dances);

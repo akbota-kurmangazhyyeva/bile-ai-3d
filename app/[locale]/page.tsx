@@ -31,7 +31,7 @@ const Page = () => {
   };
   return (
     <div className='bg-custom-bg min-h-screen flex flex-col text-white'>
-      <ComingSoonNotice/>
+      {/* <ComingSoonNotice/> */}
       <MainHeader/>
       <div className='flex items-center justify-center'>
       {
@@ -46,7 +46,7 @@ const Page = () => {
       <div className='flex justify-center lg:mt-24 mt-8 mb-8'> <MainYellowButtons/></div>
       <div className='flex items-center justify-center mb-24'>
         <div className='flex flex-col w-full items-center justify-center gap-6'>
-          <div className='lg:text-xl md:text-lg text-xs '>{t('upload')}</div>
+          {/* <div className='lg:text-xl md:text-lg text-xs '>{t('upload')}</div> */}
         {/* <FileUpload/> */}
         <SongInput/>
         </div>

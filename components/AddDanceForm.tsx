@@ -7,11 +7,12 @@ const AddDanceForm: React.FC = () => {
   const [uniqueId, setUniqueId] = useState<string>('');
   const [userName, setUserName] = useState<string>('');
   const [userSurname, setUserSurname] = useState<string>('');
+  const base_url = process.env.NEXT_PUBLIC_API_URL;
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
     try {
-      await axios.post('https://bile-contest-h5a6gcfre7ckedf2.eastus-01.azurewebsites.net/contest_dance', {
+      await axios.post(`${base_url}/contest_dance`, {
         unique_id: uniqueId,
         user_name: userName,
         user_surname: userSurname

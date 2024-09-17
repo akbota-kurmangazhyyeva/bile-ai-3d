@@ -11,6 +11,7 @@ const SongInput = () => {
   const [taskId, setTaskId] = useState('');
   const [loading, setLoading] = useState(false);
   const { timer, setTimer } = useTimer();
+  const base_url = process.env.NEXT_PUBLIC_API_URL;
 
   const handleChange = (event: { target: { value: React.SetStateAction<string>; }; }) => {
     setInputValue(event.target.value);
@@ -32,7 +33,7 @@ const SongInput = () => {
 
   const fetchTaskCount = async () => {
     try {
-      const response = await axios.get('https://bile.ngrok.app/queue-status');
+      const response = await axios.get(`${base_url}/queue-status`);
       let taskCount = 0;
       console.log(response.data)
       if (response.data.queue.length) {
@@ -48,7 +49,7 @@ const SongInput = () => {
   const handleSubmit = async () => {
     setLoading(true); // Set loading to true when the request starts
     try {
-      const response = await fetch('https://bile.ngrok.app/search-song', {
+      const response = await fetch(`${base_url}/search-song`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
