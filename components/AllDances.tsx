@@ -8,12 +8,12 @@ import ExampleCard from './ExampleCard';
 interface Dance {
   _id: string;
   song_name: string;
-  mp4_url: string;
-  pkl_url: string;
+  // mp4_url: string;
+  // pkl_url: string;
   fbx_url: string;
   mp3_url: string;
-  unique_id: string;
-  task_id: string;
+  // unique_id: string;
+  // task_id: string;
 }
 
 const AllDances: React.FC = () => {
@@ -32,15 +32,11 @@ const AllDances: React.FC = () => {
   useEffect(() => {
     const fetchDances = async () => {
       try {
-        // const response = await axios.get<{ dances: Dance[]; total_pages: number }>(
-        //   `${base_url}/all-dances?page=${currentPage}&page_size=${itemsPerPage}&search=${searchTerm}`
-        // );
-        const response = await axios.get<{ dances: Dance[]; total_pages: number }>(
-          `${base_url}/dances`
-        );
-        if (response.data) {
-          setDances(response.data.dances);
-          setTotalPages(response.data.total_pages);
+        const response = await axios.get(`${base_url}/dances`);
+        
+        if (response.data && Array.isArray(response.data)) {
+          setDances(response.data);
+          setTotalPages(Math.ceil(response.data.length / itemsPerPage)); // Fix division logic
           setError(null);
         } else {
           setDances([]);
@@ -51,10 +47,10 @@ const AllDances: React.FC = () => {
         setError('Failed to fetch dances. Please try again later.');
       }
     };
-
+  
     fetchDances();
   }, [currentPage, searchTerm]);
-
+  
   const toggleFbxVisibility = (id: string) => {
     setVisibleFbx(prevState => ({
       ...prevState,
@@ -111,12 +107,12 @@ const AllDances: React.FC = () => {
       </div>
       <div className="flex flex-col gap-4 pl-8 pr-8 pb-8 sm:pl-6 sm:pr-6 sm:pb-6 md:pl-12 md:pr-12 md:pb-12 lg:pl-24 lg:pr-24 lg:pb-24 pt-4">
         {dances.length > 0 ? (
-          dances.map(dance => (
-            <div key={dance._id} className="bg-custom-blue text-custom-light-blue flex flex-col p-4">
+          dances.map((dance, item) => (
+            <div key={`${dance._id}-${item}`} className="bg-custom-blue text-custom-light-blue flex flex-col p-4">
               <div className="flex flex-row justify-between">
                 <div className="flex flex-col">
                   <h3>{dance.song_name}</h3>
-                  <p>{dance.task_id}</p>
+                  {/* <p>{dance.task_id}</p> */}
                 </div>
                 <button onClick={() => toggleFbxVisibility(dance._id)}>
                   {visibleFbx[dance._id] ? `${t('hideDance')}` : `${t('showDance')}`}
