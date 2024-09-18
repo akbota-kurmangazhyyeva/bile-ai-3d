@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# DanceGen
 
-## Getting Started
+DanceGen is an innovative application that generates dance movements based on user-provided music names. It leverages the YouTube Data API to retrieve audio files and uses the EDGE (Editable Dance Generation) machine learning model to create corresponding dance movements.
 
-First, run the development server:
+![DanceGen Architecture](./architecture.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Demo
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Check out our demo video to see DanceGen in action:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+[Demo Video](./demo_video.mp4)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Features
 
-## Learn More
+- Generate dance movements from any music name
+- 3D visualization of generated dance movements using Autodesk FBX
+- Efficient task queuing with Redis
+- Secure deployment on Microsoft Azure
+- File storage on Amazon S3
+- User data management with MongoDB
 
-To learn more about Next.js, take a look at the following resources:
+## Tech Stack
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Backend: FastAPI, Docker
+- Frontend: Next.js, TypeScript, Tailwind CSS
+- Database: MongoDB
+- Cache and Queue: Redis
+- Cloud Services: Microsoft Azure, Amazon S3
+- APIs: YouTube Data API
+- 3D Visualization: Autodesk FBX
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Architecture
 
-## Deploy on Vercel
+![DanceGen Architecture](./architecture.png)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Installation
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+1. Clone the repository:
+   ```
+   git clone https://github.com/yourusername/dancegen.git
+   cd dancegen
+   ```
+
+2. Set up the backend:
+   ```
+   cd backend
+   docker build -t dancegen-backend .
+   docker run -p 8000:8000 dancegen-backend
+   ```
+
+3. Set up the frontend:
+   ```
+   cd frontend
+   npm install
+   npm run dev
+   ```
+
+4. Set up environment variables (create a `.env` file in both backend and frontend directories):
+   ```
+   YOUTUBE_API_KEY=your_youtube_api_key
+   MONGODB_URI=your_mongodb_uri
+   REDIS_URL=your_redis_url
+   AWS_ACCESS_KEY_ID=your_aws_access_key
+   AWS_SECRET_ACCESS_KEY=your_aws_secret_key
+   ```
+
+## Usage
+
+1. Navigate to the application in your web browser.
+2. Enter the name of a song or music piece.
+3. Click "Generate Dance" to create a dance sequence.
+4. View the 3D visualization of the generated dance movements.
+
+## User Analytics
+
+![User Analytics](./user_analytics.png)
+
+As of August 2024, DanceGen has gained 300 users within the first 3 days of launch.
+
+## Contributing
+
+We welcome contributions to DanceGen! Please read our [Contributing Guidelines](CONTRIBUTING.md) for details on our code of conduct and the process for submitting pull requests.
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgements
+
+- EDGE (Editable Dance Generation) model creators
+- YouTube Data API
+- Autodesk FBX SDK
+
+## Contact
+
+For any queries, please reach out to [your_email@example.com](mailto:your_email@example.com).
