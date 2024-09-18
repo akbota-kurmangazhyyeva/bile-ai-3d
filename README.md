@@ -6,7 +6,7 @@ DanceGen is an innovative application that generates dance movements based on us
 
 Check out our demo video to see DanceGen in action:
 
-![Demo Video](./demo_video.gif)
+[Demo Video](./demo_video.gif)
 
 ## Features
 
@@ -31,35 +31,21 @@ Check out our demo video to see DanceGen in action:
 
 ![DanceGen Architecture](./architecture.png)
 
+## Back end
+[Back end](https://github.com/youngccame1/bile-ai)
+
 ## Installation
 
 1. Clone the repository:
    ```
-   git clone https://github.com/yourusername/dancegen.git
+   git clone https://github.com/youngccame1/bile-ai-3d.git
    cd dancegen
    ```
-
-2. Set up the backend:
-   ```
-   cd backend
-   docker build -t dancegen-backend .
-   docker run -p 8000:8000 dancegen-backend
-   ```
-
 3. Set up the frontend:
    ```
    cd frontend
    npm install
    npm run dev
-   ```
-
-4. Set up environment variables (create a `.env` file in both backend and frontend directories):
-   ```
-   YOUTUBE_API_KEY=your_youtube_api_key
-   MONGODB_URI=your_mongodb_uri
-   REDIS_URL=your_redis_url
-   AWS_ACCESS_KEY_ID=your_aws_access_key
-   AWS_SECRET_ACCESS_KEY=your_aws_secret_key
    ```
 
 ## Usage
