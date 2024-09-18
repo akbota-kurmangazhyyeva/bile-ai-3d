@@ -2,13 +2,11 @@
 
 DanceGen is an innovative application that generates dance movements based on user-provided music names. It leverages the YouTube Data API to retrieve audio files and uses the EDGE (Editable Dance Generation) machine learning model to create corresponding dance movements.
 
-![DanceGen Architecture](./architecture.png)
-
 ## Demo
 
 Check out our demo video to see DanceGen in action:
 
-[Demo Video](./demo_video.mp4)
+[Demo Video](./demo_video.gif)
 
 ## Features
 
