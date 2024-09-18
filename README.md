@@ -6,7 +6,7 @@ DanceGen is an innovative application that generates dance movements based on us
 
 Check out our demo video to see DanceGen in action:
 
-[Demo Video](./demo_video.gif)
+![Demo Video](./demo_video.gif)
 
 ## Features
 
