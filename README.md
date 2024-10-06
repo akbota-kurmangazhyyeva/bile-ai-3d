@@ -8,6 +8,10 @@ Check out our demo video to see DanceGen in action:
 
 [Demo Video](./demo_video.gif)
 
+## User generated Dances
+I have stopped the GPU VM I rented, and now only the dance animations generated in August during the launch are available.
+[Generated dances](https://bile-front-v1.vercel.app/en/all-dances)
+
 ## Features
 
 - Generate dance movements from any music name
