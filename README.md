@@ -61,7 +61,7 @@ I have stopped the GPU VM I rented, and now only the dance animations generated 
 
 ## User Analytics
 
-![User Analytics](./user_analytics.png)
+![User Analytics](./user_analytics.jpg)
 
 As of August 2024, DanceGen has gained 300 users within the first 3 days of launch.
 
